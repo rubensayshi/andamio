@@ -225,7 +225,7 @@ Andamio.views = (function () {
             this.modalCount = 0;
         },
 
-        activateView: function (view, url, expiration, scrollPosition) {
+        activateView: function (view, url, expiration, scrollPosition, refresh) {
 
             view.active = true;
 
@@ -239,7 +239,7 @@ Andamio.views = (function () {
                 Andamio.dom.doc.trigger("Andamio:views:activateView:start", [view, "load", url]);
 
                 // TODO: when opening a page and going back before it's loaded, the currentUrl is set to the new URL when the load finishes
-                Andamio.page.load(url, expiration, true, function (response, errorType) {
+                var callback = function (response, errorType) {
 
                     // we always get a response, even if there's an error
                     view.content[0].innerHTML = response;
@@ -251,7 +251,13 @@ Andamio.views = (function () {
                     }
 
                     if (! errorType) Andamio.dom.doc.trigger("Andamio:views:activateView:finish", [view, "load", url]);
-                });
+                };
+
+                if (refresh) {
+                    Andamio.page.refresh(url, expiration, callback);
+                } else {
+                    Andamio.page.load(url, expiration, true, callback);
+                }
             } else {
                 Andamio.dom.doc.trigger("Andamio:views:activateView:start", [view, "load", this.currentUrl]);
                 Andamio.dom.doc.trigger("Andamio:views:activateView:finish", [view, "load", this.currentUrl]);
@@ -263,7 +269,7 @@ Andamio.views = (function () {
             view.active = false;
         },
 
-        pushView: function (view, url, expiration, scrollPosition) {
+        pushView: function (view, url, expiration, scrollPosition, refresh) {
 
             this.currentView = view;
 
@@ -272,7 +278,7 @@ Andamio.views = (function () {
                 this.deactivateView(this.previousView);
             }
 
-            this.activateView(view, url, expiration, scrollPosition);
+            this.activateView(view, url, expiration, scrollPosition, refresh);
         },
 
         popView: function () {
@@ -361,9 +367,9 @@ Andamio.views = (function () {
             }
         },
 
-        pushChild: function (url, expiration) {
+        pushChild: function (url, expiration, refresh) {
 
-            // Don't open the same URL, instead refresh
+            // Don't open the same URL, instead scroll to top
             if (url === Andamio.views.currentUrl) {
                 this.currentView.scroller[0].scrollTop = 0;
 
@@ -376,7 +382,7 @@ Andamio.views = (function () {
 
             // Initial situation
             case parentView:
-                this.pushView(childView, url, expiration, 0);
+                this.pushView(childView, url, expiration, 0, refresh);
 
                 if (Andamio.config.webapp) {
                     parentView.slide("slide-left");
@@ -386,7 +392,7 @@ Andamio.views = (function () {
                 break;
 
             case childView:
-                this.pushView(childViewAlt, url, expiration, 0);
+                this.pushView(childViewAlt, url, expiration, 0, refresh);
 
                 if (Andamio.config.webapp) {
                     childViewAlt.container.removeClass("slide-left").addClass("slide-right");
@@ -400,7 +406,7 @@ Andamio.views = (function () {
                 break;
 
             case childViewAlt:
-                this.pushView(childView, url, expiration, 0);
+                this.pushView(childView, url, expiration, 0, refresh);
 
                 if (Andamio.config.webapp) {
                     childView.container.removeClass("slide-left").addClass("slide-right");
