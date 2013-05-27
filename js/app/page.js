@@ -54,7 +54,8 @@ Andamio.page = (function () {
                 cache: cache,
                 headers: {
                     "X-PJAX": true,
-                    "X-Requested-With": "XMLHttpRequest"
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-Fast-Connection" : Andamio.connection.isFast
                 },
                 error: onError,
                 success: onSuccess,

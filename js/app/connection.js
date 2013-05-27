@@ -27,6 +27,11 @@ Andamio.connection = (function () {
             return navigator.connection ? navigator.connection.type : "ethernet";
         },
 
+        get isFast() {
+
+            return this.type === "wifi" || this.type === "ethernet";
+        },
+
         init: function () {
 
             isOnline = navigator.connection ? navigator.connection.type !== "none" : navigator.onLine;
