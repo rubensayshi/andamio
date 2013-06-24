@@ -78,9 +78,7 @@ Andamio.config = (function () {
                 this.os.tablet = true;
             }
 
-            if (this.touch) {
-                this.fastclick = new FastClick(win.document.body);
-            } else {
+            if (!this.touch) {
                 Andamio.dom.html.addClass("no-touch");
             }
 

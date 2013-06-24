@@ -33,7 +33,7 @@ Andamio.events = (function () {
 
         attach: function (selector, fn, lock, timeout) {
 
-            Andamio.dom.viewport.on("click", selector, function (e) {
+            Andamio.dom.viewport.on("tap click", selector, function (e) {
 
                 if (! isLocked) {
 

@@ -53,7 +53,6 @@ module.exports = function(grunt) {
             libs: {
                 src: [
                     'js/lib/swipe.js',      // https://github.com/bradbirdsall/Swipe
-                    'js/lib/fastclick.js',  // https://github.com/ftlabs/fastclick
                     'js/lib/lscache.js'     // https://github.com/pamelafox/lscache
                 ],
                 dest: 'dist/<%= pkg.name %>.libs.js'
@@ -78,6 +77,7 @@ module.exports = function(grunt) {
                     'js/lib/zepto/fx.js',
                     'js/lib/zepto/stack.js',
                     'js/lib/zepto/touch.js',
+                    'js/lib/zepto.ghostclick.js',
                     'js/lib/zepto.scroll.js',
                     'dist/<%= pkg.name %>.libs.js',
                     'dist/<%= pkg.name %>.js'

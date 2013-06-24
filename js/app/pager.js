@@ -111,7 +111,7 @@ Andamio.pager = (function () {
             this.status = true;
 
             // Add the load more button
-            this.loadMoreAction.on("click", $.proxy(self.loadNextPage, self)).insertAfter(this.options.pagerWrapper);
+            this.loadMoreAction.on("tap click", $.proxy(self.loadNextPage, self)).insertAfter(this.options.pagerWrapper);
 
             // Add the spinner
             this.spinner.insertAfter(this.options.pagerWrapper);
@@ -127,7 +127,7 @@ Andamio.pager = (function () {
         this.status = false;
 
         // Remove load more button and spinner
-        this.loadMoreAction.off("click").remove();
+        this.loadMoreAction.off("tap click").remove();
         this.spinner.remove();
 
         // Show the message that there are no more pages

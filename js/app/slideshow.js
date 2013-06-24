@@ -49,7 +49,7 @@ Andamio.slideshow = (function () {
 
         this.dots.wrapper
             .insertAfter(self.wrapper)
-            .on("click", function (event) {
+            .on("tap click", function (event) {
                 var target = event.target;
 
                 self.dots.items.each(function (index, item) {
@@ -69,8 +69,8 @@ Andamio.slideshow = (function () {
         });
 
         this.wrapper
-            .on("click", ".action-slideshow-next", this.slideshow.next)
-            .on("click", ".action-slideshow-prev", this.slideshow.prev);
+            .on("tap click", ".action-slideshow-next", this.slideshow.next)
+            .on("tap click", ".action-slideshow-prev", this.slideshow.prev);
     }
 
     Slideshow.prototype.destroy = function () {
@@ -80,8 +80,8 @@ Andamio.slideshow = (function () {
 
         // needs to go last
         this.wrapper
-            .off("click", ".action-slideshow-next", this.slideshow.next)
-            .off("click", ".action-slideshow-prev", this.slideshow.prev);
+            .off("tap click", ".action-slideshow-next", this.slideshow.next)
+            .off("tap click", ".action-slideshow-prev", this.slideshow.prev);
         this.wrapper.find(".slideshow-container").css("width", "");
     };
 
