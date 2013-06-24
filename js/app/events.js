@@ -50,7 +50,7 @@ Andamio.events = (function () {
 
         detach: function (selector) {
 
-            Andamio.dom.viewport.off("click", selector);
+            Andamio.dom.viewport.off("tap click", selector);
         }
     };
 })();
