@@ -1,5 +1,5 @@
 /*jshint es5: true, browser: true, undef:true, unused:true, boss:true */
-/*global Andamio, FastClick */
+/*global Andamio */
 
 Andamio.config = (function () {
 
