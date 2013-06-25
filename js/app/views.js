@@ -84,7 +84,7 @@ Andamio.views = (function () {
          */
         reset: function () {
 
-            if (this.position && Andamio.config.webapp) {
+            if (this.position && Andamio.config.transitions) {
 
                 this.position = this.initialPosition;
                 this.container
@@ -118,7 +118,7 @@ Andamio.views = (function () {
         scroller: {
             configurable: true,
             get: function () {
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     return this.container.hasClass("overthrow") ? this.container : this.container.find(".overthrow");
                 } else {
                     return Andamio.dom.win;
@@ -127,10 +127,10 @@ Andamio.views = (function () {
         },
         scrollPosition: {
             get: function () {
-                return Andamio.config.webapp ? this.scroller[0].scrollTop : Andamio.dom.viewport[0].scrollTop;
+                return Andamio.config.transitions ? this.scroller[0].scrollTop : Andamio.dom.viewport[0].scrollTop;
             },
             set: function (value) {
-                if (Andamio.config.webapp && this.scroller.length) this.scroller[0].scrollTop = value;
+                if (Andamio.config.transitions && this.scroller.length) this.scroller[0].scrollTop = value;
                 else Andamio.dom.viewport[0].scrollTop = value;
             }
         },
@@ -317,7 +317,7 @@ Andamio.views = (function () {
                 return false;
             } else {
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     modalView.slide("slide-default");
                 }
 
@@ -330,7 +330,7 @@ Andamio.views = (function () {
 
             if (this.modalCount > 0) {
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     modalView.slide("slide-bottom");
                 }
 
@@ -347,7 +347,7 @@ Andamio.views = (function () {
                 return false;
             } else {
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     mediaView.slide("slide-default");
                 }
 
@@ -360,7 +360,7 @@ Andamio.views = (function () {
 
             if (this.mediaCount > 0) {
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     mediaView.slide("slide-bottom");
                 }
 
@@ -375,7 +375,7 @@ Andamio.views = (function () {
 
             // Don't open the same URL, instead refresh
             if (url === Andamio.views.currentUrl) {
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     $.scrollElement(this.currentView.scroller[0], 0);
                 } else {
                     this.currentView.scrollPosition = 0;
@@ -392,7 +392,7 @@ Andamio.views = (function () {
             case parentView:
                 this.pushView(childView, url, 0, refresh);
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     parentView.slide("slide-left");
                     childView.slide("slide-default");
                 }
@@ -402,7 +402,7 @@ Andamio.views = (function () {
             case childView:
                 this.pushView(childViewAlt, url, 0, refresh);
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     childViewAlt.container.removeClass("slide-left").addClass("slide-right");
 
                     Andamio.util.delay(function () {
@@ -416,7 +416,7 @@ Andamio.views = (function () {
             case childViewAlt:
                 this.pushView(childView, url, 0, refresh);
 
-                if (Andamio.config.webapp) {
+                if (Andamio.config.transitions) {
                     childView.container.removeClass("slide-left").addClass("slide-right");
 
                     Andamio.util.delay(function () {
@@ -433,7 +433,7 @@ Andamio.views = (function () {
 
             var currentView = this.currentView;
 
-            if (Andamio.config.webapp) {
+            if (Andamio.config.transitions) {
                 switch (currentView) {
                 case parentView:
                     return; // abort!
@@ -551,7 +551,7 @@ Andamio.views = (function () {
             }, true);
 
             // Swipe right to go back
-            if (Andamio.config.webapp && Andamio.config.touch) {
+            if (Andamio.config.transitions && Andamio.config.touch) {
                 Andamio.dom.doc.on("swipeRight", ".child-view", function () {
 
                     self.popChild();
