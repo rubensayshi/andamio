@@ -67,6 +67,7 @@ Andamio.config = (function () {
             this.server  = win.location.origin + win.location.pathname;
             this.touch   = 'ontouchstart' in win;
             this.cache   = window.lscache ? window.lscache.supported() : false;
+            this.transitions = this.webapp && !Andamio.dom.html.hasClass('notransitions');
 
             // Default expiration times, configurable per view
             this.expiration = {
@@ -113,14 +114,14 @@ Andamio.config = (function () {
                 this.webapp = true;
             }
 
-            if (this.os.android) {
-                this.webapp = false;
-            }
-
             if (this.webapp) {
                 Andamio.dom.html.removeClass("website").addClass("webapp");
             } else {
                 Andamio.dom.html.removeClass("webapp").addClass("website");
+            }
+
+            if (!this.transitions) {
+                Andamio.dom.html.addClass("notransitions");
             }
 
             this.website = !this.webapp;
