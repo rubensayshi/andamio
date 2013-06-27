@@ -70,10 +70,18 @@ Andamio.views = (function () {
 
             Andamio.events.lock();
 
-            container.addClass(opts.a).one("webkitTransitionEnd", function () {
-                container.addClass(opts.b).removeClass(opts.c);
-                Andamio.events.unlock();
-            });
+            // before we animate the slide we remove .fixed-slides to enable transform again
+            Andamio.dom.viewport.removeClass('fixed-slides');
+            // use a setTimeout(0) to avoid the removing of .fixed-slides also being animated
+            setTimeout(function() {
+                container.addClass(opts.a).one("webkitTransitionEnd", function () {
+                    container.addClass(opts.b).removeClass(opts.c);
+                    Andamio.events.unlock();
+
+                    // add .fixed-slides to disable transform
+                    Andamio.dom.viewport.addClass('fixed-slides');
+                });
+            }, 0);
 
             // update positions
             this.position = to;
