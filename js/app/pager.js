@@ -139,9 +139,6 @@ Andamio.pager = (function () {
         this.loadMoreAction.off("click").remove();
         this.spinner.remove();
 
-        // Show the message that there are no more pages
-        this.noMorePages.insertAfter(this.options.pagerWrapper);
-
         if (this.options.autoFetch) {
             this.disableAutofetch();
         }
@@ -211,6 +208,9 @@ Andamio.pager = (function () {
                 // if less children than items per page are returned, disable the pager
                 if (self.options.pagerWrapper.children().length - children < self.options.itemsPerPage) {
                     self.disable();
+
+                    // Show the message that there are no more pages
+                    self.noMorePages.insertAfter(self.options.pagerWrapper);
                 }
 
                 self.updateScroller();
