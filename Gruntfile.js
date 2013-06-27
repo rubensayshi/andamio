@@ -64,6 +64,7 @@ module.exports = function(grunt) {
                     // custom jQuery build created with:
                     // grunt custom:-deprecated,-effects,-event-alias,-offset,-wrap,-sizzle
                     'js/lib/jquery/jquery-2.0.2.js',
+                    'js/lib/jquery/jquery.jgestures.js',
                     'js/lib/jquery/jquery.scrollto.js',
                     'dist/<%= pkg.name %>.libs.js',
                     'dist/<%= pkg.name %>.js'

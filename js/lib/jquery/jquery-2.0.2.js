@@ -1,5 +1,5 @@
 /*!
- * jQuery JavaScript Library v2.0.2 -sizzle,-wrap,-event-alias,-effects,-offset,-deprecated
+ * jQuery JavaScript Library v2.0.2 -sizzle,-wrap,-effects,-offset,-deprecated
  * http://jquery.com/
  *
  * Includes Sizzle.js
@@ -9,7 +9,7 @@
  * Released under the MIT license
  * http://jquery.org/license
  *
- * Date: 2013-06-13T15:55Z
+ * Date: 2013-06-24T15:48Z
  */
 (function( window, undefined ) {
 
@@ -46,7 +46,7 @@ var
 	// List of deleted data cache ids, so we can reuse them
 	core_deletedIds = [],
 
-	core_version = "2.0.2 -sizzle,-wrap,-event-alias,-effects,-offset,-deprecated",
+	core_version = "2.0.2 -sizzle,-wrap,-effects,-offset,-deprecated",
 
 	// Save a reference to some core methods
 	core_concat = core_deletedIds.concat,
@@ -4820,6 +4820,38 @@ function buildParams( prefix, obj, traditional, add ) {
 		add( prefix, obj );
 	}
 }
+jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblclick " +
+	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+	"change select submit keydown keypress keyup error contextmenu").split(" "), function( i, name ) {
+
+	// Handle event binding
+	jQuery.fn[ name ] = function( data, fn ) {
+		return arguments.length > 0 ?
+			this.on( name, null, data, fn ) :
+			this.trigger( name );
+	};
+});
+
+jQuery.fn.extend({
+	hover: function( fnOver, fnOut ) {
+		return this.mouseenter( fnOver ).mouseleave( fnOut || fnOver );
+	},
+
+	bind: function( types, data, fn ) {
+		return this.on( types, null, data, fn );
+	},
+	unbind: function( types, fn ) {
+		return this.off( types, null, fn );
+	},
+
+	delegate: function( selector, types, data, fn ) {
+		return this.on( types, selector, data, fn );
+	},
+	undelegate: function( selector, types, fn ) {
+		// ( namespace ) or ( selector, types [, fn] )
+		return arguments.length === 1 ? this.off( selector, "**" ) : this.off( types, selector || "**", fn );
+	}
+});
 var
 	// Document location
 	ajaxLocParts,
