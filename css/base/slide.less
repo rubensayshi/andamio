@@ -1,21 +1,45 @@
 .slide-right {
     .translate3d(100%);
+    
+    .fixed-slides & {
+        margin-left: 100%;
+        .transform(none);
+    }
 }
 
 .slide-left {
     .translate3d(-100%);
+    
+    .fixed-slides & {
+        margin-right: 100%;
+        .transform(none);
+    }
 }
 
 .slide-bottom {
     .translate3d(0, 100%, 0);
+    
+    .fixed-slides & {
+        margin-top: 100%;
+        .transform(none);
+    }
 }
 
 .slide-top {
     .translate3d(0, -100%, 0);
+    
+    .fixed-slides & {
+        margin-bottom: 100%;
+        .transform(none);
+    }
 }
 
 .slide-default {
     .translate3d(0);
+    
+    .fixed-slides & {
+        .transform(none);
+    }
 }
 
 .slide-in-from-left,
